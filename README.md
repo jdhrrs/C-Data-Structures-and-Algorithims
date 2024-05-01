@@ -1,4 +1,4 @@
-or this Programming Assignment, you are to create your own set of classes that may be used in later programs.  There are three classes:
+For this Programming Assignment, you are to create your own set of classes that may be used in later programs.  There are three classes:
 
 Person
 Address
