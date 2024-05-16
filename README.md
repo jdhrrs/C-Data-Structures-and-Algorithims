@@ -1,10 +1,4 @@
 # Assignment2
-Sure! I'll create a `README.md` file for your project, "Assignment2", based on the provided files. Here is a draft:
-
----
-
-# Assignment2
-
 ## Overview
 
 This project implements a simple address book using a linked list data structure. The address book stores `Person` objects, which include `Address` details. The project consists of several C++ files organized into logical units for handling addresses, persons, and linked list operations.
