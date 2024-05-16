@@ -8,9 +8,9 @@
  * connections between data points (Persons) in the list.
  *
  * Justin Harris
- * 2024-04-29
+ * 05-08-2024
  * COSC 350 - Advanced Algorithms and Data Structures
- * Programming Assignment 1
+ * Programming Assignment 2
  * Columbia College of Missouri
  */
 #ifndef NODE_H
