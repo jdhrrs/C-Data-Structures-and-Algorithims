@@ -7,69 +7,95 @@
  * the operations associated with a singly linked list of Person objects.
  *
  * Justin Harris
- * 05-08-2024
+ * 05-30-2024
  * COSC 350 - Advanced Algorithms and Data Structures
- * Programming Assignment 2
+ * Programming Assignment 5
  * Columbia College of Missouri
  */
-#include "LinkedList.h"  // Include the header file for the LinkedList class
+#include "LinkedList.h"
+#include <iostream>
 
-// Constructor that initializes the list with a null head, indicating an empty list
-LinkedList::LinkedList() : head(nullptr) {}
-
-// Destructor that cleans up all allocated nodes to prevent memory leaks
+ // Destructor to free the memory used by the list
 LinkedList::~LinkedList() {
-    Node* current = head;  // Start from the head of the list
-    while (current != nullptr) {  // Traverse all nodes in the list
-        Node* next = current->next;  // Temporarily store the next node
-        delete current;  // Delete the current node
-        current = next;  // Move to the next node
+    Node* current = head;
+    while (current != nullptr) {
+        Node* toDelete = current;
+        current = current->next;
+        delete toDelete;
     }
 }
 
-// Method to add a new node containing the Person object to the front of the list
-void LinkedList::add(const Person& data) {
-    Node* newNode = new Node(data, head);  // Create a new node with data and point it to the current head
-    head = newNode;  // Update head to the new node
-}
-
-// Method to remove a node by matching the Person's name
-bool LinkedList::remove(const std::string& name) {
-    Node* current = head;  // Start from the head of the list
-    Node* previous = nullptr;  // Keep track of the previous node
-    while (current != nullptr) {  // Traverse all nodes
-        if (current->data.getName() == name) {  // Check if the current node's data matches the name
-            if (previous == nullptr) {  // If it's the first node
-                head = current->next;  // Update head to the next node
-            }
-            else {  // If it's not the first node
-                previous->next = current->next;  // Bypass the current node
-            }
-            delete current;  // Delete the current node
-            return true;  // Return true indicating success
+// Add a new person to the list in sorted order
+void LinkedList::add(const Person& person) {
+    Node* newNode = new Node(person);
+    if (head == nullptr || head->person.getFullName() >= person.getFullName()) {
+        newNode->next = head;
+        head = newNode;
+    }
+    else {
+        Node* current = head;
+        while (current->next != nullptr && current->next->person.getFullName() < person.getFullName()) {
+            current = current->next;
         }
-        previous = current;  // Move previous to current
-        current = current->next;  // Move to the next node
+        newNode->next = current->next;
+        current->next = newNode;
     }
-    return false;  // Return false if the name was not found
 }
 
-// Method to count the number of nodes in the list
+// Remove a person from the list
+bool LinkedList::remove(const std::string& fullName) {
+    if (head == nullptr) {
+        return false;
+    }
+    if (head->person.getFullName() == fullName) {
+        Node* toDelete = head;
+        head = head->next;
+        delete toDelete;
+        return true;
+    }
+    Node* current = head;
+    while (current->next != nullptr && current->next->person.getFullName() != fullName) {
+        current = current->next;
+    }
+    if (current->next == nullptr) {
+        return false;
+    }
+    Node* toDelete = current->next;
+    current->next = current->next->next;
+    delete toDelete;
+    return true;
+}
+
+// Count the number of persons in the list
 int LinkedList::count() const {
-    int count = 0;  // Initialize count
-    Node* current = head;  // Start from the head of the list
-    while (current != nullptr) {  // Traverse all nodes
-        count++;  // Increment count for each node
-        current = current->next;  // Move to the next node
+    int count = 0;
+    Node* current = head;
+    while (current != nullptr) {
+        ++count;
+        current = current->next;
     }
-    return count;  // Return the total count of nodes
+    return count;
 }
 
-// Method to print the data of all nodes in the list
+// Print all persons in the list
 void LinkedList::print() const {
-    Node* current = head;  // Start from the head of the list
-    while (current != nullptr) {  // Traverse all nodes
-        current->data.print();  // Call the print method of the data (Person)
-        current = current->next;  // Move to the next node
+    Node* current = head;
+    while (current != nullptr) {
+        current->person.print();
+        current = current->next;
     }
+}
+
+// Recursive helper function to print the list in reverse order
+void LinkedList::printReverseHelper(Node* node) const {
+    if (node == nullptr) {
+        return;
+    }
+    printReverseHelper(node->next);
+    node->person.print();
+}
+
+// Print all persons in the list in reverse order
+void LinkedList::printReverse() const {
+    printReverseHelper(head);
 }

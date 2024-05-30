@@ -1,42 +1,32 @@
 /**
- *  Person.cpp
- *  Implementation of the Person class.
+ * Person.cpp
+ * Implementation of the Person class.
  *
- * This file provides the implementation for the Person class, facilitating the creation
- * and management of person data, including actions like constructing a person and
- * printing their details to the console.
+ * This file provides the implementation of the Person class, which includes
+ * methods for initializing a person's name and address, and a method for printing
+ * the person's details. The Person class is central to demonstrating the usage
+ * of composite objects as it incorporates an Address object within it.
  *
  * Justin Harris
- * 05-16-2024
+ * 05-30-2024
  * COSC 350 - Advanced Algorithms and Data Structures
- * Programming Assignment 3
+ * Programming Assignment 5
  * Columbia College of Missouri
  */
-
 #include "Person.h"
 #include <iostream>
 
- // Constructor for the Person class
-Person::Person(std::string name, int age, Address address)
-    : name(name), age(age), address(address) {}
+ // Constructor
+Person::Person(const std::string& first, const std::string& middle, const std::string& last, const Address& addr)
+    : firstName(first), middleName(middle), lastName(last), address(addr) {}
 
-// Return the person's name
-std::string Person::getName() const {
-    return name;
+// Get full name
+std::string Person::getFullName() const {
+    return firstName + " " + middleName + " " + lastName;
 }
 
-// Return the person's age
-int Person::getAge() const {
-    return age;
-}
-
-// Return the person's address
-Address Person::getAddress() const {
-    return address;
-}
-
-// Print the person's details to the console
+// Print person details
 void Person::print() const {
-    std::cout << "Name: " << name << ", Age: " << age << std::endl;
+    std::cout << firstName << " " + middleName + " " + lastName << std::endl;
     address.print();
 }

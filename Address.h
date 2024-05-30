@@ -1,37 +1,30 @@
 /**
- *  Address.h
- *  Header file for the Address class.
+ * Address.h
+ * Declaration of the Address class.
  *
- * This file provides the declaration of the Address class. The Address class is designed
- * to encapsulate street, city, state, and zip code details of an individual or location,
- * offering a comprehensive way to manage and display address information.
+ * Defines the Address class with properties to store detailed address information,
+ * including street, city, state, and zip code. This class provides a structured
+ * way to manage address data for use in larger compositions, such as a Person.
  *
  * Justin Harris
- * 05-16-2024
+ * 2024-05-30
  * COSC 350 - Advanced Algorithms and Data Structures
- * Programming Assignment 3
+ * Programming Assignment 5
  * Columbia College of Missouri
  */
-
-#ifndef ADDRESS_H
-#define ADDRESS_H
-
+#pragma once
 #include <string>
+#include <iostream>
 
- // Class representing an address
 class Address {
-public:
-    Address(std::string street, std::string city, std::string state, std::string zip);  // Constructor with parameters
-    std::string getStreet() const;  // Getter for street
-    std::string getCity() const;  // Getter for city
-    std::string getState() const;  // Getter for state
-    std::string getZip() const;  // Getter for zip code
-    void print() const;  // Print address details
-
 private:
     std::string street;
     std::string city;
     std::string state;
     std::string zip;
+
+public:
+    Address(const std::string& str, const std::string& c, const std::string& st, const std::string& z);
+
+    void print() const;
 };
-#endif // ADDRESS_H

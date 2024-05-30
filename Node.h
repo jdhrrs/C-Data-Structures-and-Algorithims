@@ -1,31 +1,31 @@
 /**
- *  Node.h
- *  Declaration of the Node class.
+ * Node.h
+ * Declaration of the Node class for the linked list.
  *
- * This file provides the declaration of the Node class, which is used to represent
- * a node in a linked structure. Each node holds a Person object and a pointer to the
- * next node. This structure is fundamental in building the stack using linked lists.
+ * The Node class defines the fundamental element of a singly linked list,
+ * containing a Person object as data and a pointer to the next node in the list.
+ * This class is utilized within the LinkedList class to store and manage
+ * connections between data points (Persons) in the list.
  *
  * Justin Harris
- * 05-16-2024
+ * 05-30-2024
  * COSC 350 - Advanced Algorithms and Data Structures
- * Programming Assignment 1
+ * Programming Assignment 5
  * Columbia College of Missouri
  */
-
 #ifndef NODE_H
 #define NODE_H
 
 #include "Person.h"
 
- // Node class for linked list structure
 class Node {
 public:
-    Person data;  // Data in the node
-    Node* next;  // Pointer to the next node
+    Person person;
+    Node* next;
 
-    // Constructor to initialize node with a person object
-    Node(Person p) : data(p), next(nullptr) {}
+    Node(const Person& person, Node* next = nullptr)
+        : person(person), next(next) {}
 };
 
-#endif 
+#endif // NODE_H
+

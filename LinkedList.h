@@ -7,29 +7,32 @@
  * count, and print nodes, encapsulating all list management operations.
  *
  * Justin Harris
- * 05-08-2024
+ * 05-30-2024
  * COSC 350 - Advanced Algorithms and Data Structures
- * Programming Assignment 2
+ * Programming Assignment 5
  * Columbia College of Missouri
  */
-#ifndef LINKEDLIST_H
-#define LINKEDLIST_H
-
-#include "Node.h"
-#include <iostream>
+#pragma once
+#include "Person.h"
 
 class LinkedList {
 private:
+    struct Node {
+        Person person;
+        Node* next;
+        Node(const Person& p) : person(p), next(nullptr) {}
+    };
     Node* head;
 
+    void printReverseHelper(Node* node) const;
+
 public:
-    LinkedList();  // Constructor to initialize the list
-    ~LinkedList(); // Destructor to clean up memory
+    LinkedList() : head(nullptr) {}
+    ~LinkedList();
 
-    void add(const Person& data);  // Add a new person to the list
-    bool remove(const std::string& name);  // Remove a person by name
-    int count() const;  // Count the number of nodes in the list
-    void print() const;  // Print all persons in the list
+    void add(const Person& person);
+    bool remove(const std::string& fullName);
+    int count() const;
+    void print() const;
+    void printReverse() const;
 };
-
-#endif
